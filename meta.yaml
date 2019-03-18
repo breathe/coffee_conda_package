@@ -18,52 +18,43 @@ build:
   # - msgpack-python = msgpack-python:main
   #
   # Would create an entry point called msgpack-python that calls msgpack-python.main()
-
-  # If this is a new build for the same version, increment the build
-  # number. If you do not include this key, it defaults to 0.
-  number: 1
+  # just always use build number 0 ...
+  number: 0
 
 requirements:
   build:
-    - python
+    - python=3.6
     - setuptools
     - mpi4py
     - numpy
     - scipy
     - matplotlib
     - ipython
-    - jupyter
-    - pandas
     - sympy
-    - nose
   run:
-    - python
+    - python=3.6
     - mpi4py
     - numpy
     - scipy
     - matplotlib
     - ipython
-    - jupyter
-    - pandas
     - sympy
-    - nose
-
 test:
   # Python imports
   imports:
     - PoissonSolver
 
-  # commands:
-  # You can put test commands to be run here.  Use this to test that the
-  # entry points work.
-  # You can also put a file called run_test.py in the recipe that will be run
-  # at test time.
-  # requires:
-  # Put any additional test requirements here.  For example
-  # - nose
+  commands:
+    # You can put test commands to be run here.  Use this to test that the
+    # entry points work.
+    # You can also put a file called run_test.py in the recipe that will be run
+    # at test time.
+    # requires:
+    # Put any additional test requirements here.  For example
+    # - nosetests
 
 about:
-  home: https://data.mendeley.com/datasets/s2x4d542dc/1
+  home: https://github.com/breathe/coffee_conda_package
   license: BSD 3-Clause
 # See
 # http://docs.continuum.io/conda/build.html for

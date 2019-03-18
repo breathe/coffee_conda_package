@@ -1,0 +1,21 @@
+# Build and upload conda package via travis: adapted from this gist: https://gist.github.com/zshaheen/fe76d1507839ed6fbfbccef6b9c13ed9
+os:
+  - linux
+  - osx
+install:
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then wget https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.sh
+    -O miniconda.sh; else wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
+    -O miniconda.sh; fi
+  - bash miniconda.sh -b -p $HOME/miniconda
+  - rm miniconda.sh
+  - export PATH="$HOME/miniconda/bin:$PATH"
+  - hash -r
+  - conda config --set always_yes yes --set changeps1 no
+  - conda update -q conda
+script:
+  - echo "Building"
+after_success:
+  - test $TRAVIS_BRANCH = "master" && conda install conda-build && conda install anaconda-client && conda install conda-verify && bash conda_upload.sh
+env:
+  global:
+    secure: Tt0+4UVw2kyoTQCcxVenQcQa9F/QBqkmOJiYiZgyxJmbEwCkbWodIc0bVcgUDV7sjnqMrLSIOwqjadRUv4+htxbtQjxgEZdjPN/j01OyoFd0Ab/waFJIPRTBGyFHRbXc1OcEbFZLLzXYuHguhKzyUlvp0X5OU06m6ADGcHvkb0bUinlXK1E4LMBG7X+NirU0jEJ7oi9MMzgd13IUTkO0tVDdmBq1e4NSlXpiZZRoCxUvhzpQ1sfUlFUVNoAQhe6BIRvCaLChUbnGa3CzUEBduDWD6KGgnZHq6+N+WGAPv7hP9WwRHMC1+ltFfRdCGgy487UkpAyYTSBijLAHu8X0O0pIC5NNu0erA485kGzJ5/nClhBzV3ruS796DPHOYyNtW1tP2Pr3oW9WqIiXjL1Go0+PlAiBxnFwZeyCMAHgrjW+DLSaQO1H2hDf/r24ySu1EbgcrBcYZln7BaHZQyoReVz40v441xdgNscP5Q4Lhgd83qPoIHUWJIJp/0XdsKwoi8pYeOOK4DuBnmjNL71q5mDB5lhSB4sZ0puqK2V2cz13PjehOOnDHjkEVJazrCLTaJ56sEvJK643dmtt/2XrFnQbTPPcOgbXEjkQoqoo1694do+muhe9KpFGJMilZFHYEHLhdc5wqD9EqBoFYc3OuKyYTSG/STEoZo4l85Ymanw=
