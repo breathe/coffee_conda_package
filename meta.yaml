@@ -3,9 +3,11 @@ package:
   version: 1.1
 
 source:
-  fn: CoFFEE_1.1.tar.gz
-  url: https://data.mendeley.com/datasets/s2x4d542dc/1/files/602063ca-d751-4c5f-8d34-075b564b634d/CoFFEE_1.1.tar.gz
-  md5: 34d1c7498feb98e89afcf79d801b00ce
+  git_url: https://github.com/skw32/CoFFEE_PoissonSolver_KO_pa.git
+  git_rev: master
+  # fn: CoFFEE_1.1.tar.gz
+  # url: https://data.mendeley.com/datasets/s2x4d542dc/1/files/602063ca-d751-4c5f-8d34-075b564b634d/CoFFEE_1.1.tar.gz
+  # md5: 34d1c7498feb98e89afcf79d801b00ce
   patches:
     # List any patch files here
     - 0001-Add-alternative-setup.py-script.patch
